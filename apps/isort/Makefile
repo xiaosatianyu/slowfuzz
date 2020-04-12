@@ -12,7 +12,7 @@ LIBFUZZER_SRC=$(SRC_DIR)/Fuzzer
 LIBFUZZER_LIB=$(LIBFUZZER_SRC)/libFuzzer.a
 
 DBGFLAGS=-g -ggdb3
-CXXFLAGS=-O2 -Wall -std=c++11 -Wno-unused-variable $(DBGFLAGS)
+CXXFLAGS=-O0 -Wall -std=c++11 -Wno-unused-variable $(DBGFLAGS)
 COV_FLAGS=-fsanitize=address -fsanitize-coverage=edge,trace-pc-guard
 
 # Defaults for LibFuzzer
@@ -31,7 +31,7 @@ prelim:
 
 # make our modified version of the Fuzzer
 fuzzer:
-	$(CXX) -c -g -O2 -std=c++11 $(LIBFUZZER_SRC)/*.cpp -I$(LIBFUZZER_SRC)
+	$(CXX) -c -g -O0 -std=c++11 $(LIBFUZZER_SRC)/*.cpp -I$(LIBFUZZER_SRC)
 	ar rv $(LIBFUZZER_SRC)/libFuzzer.a Fuzzer*.o
 	rm Fuzzer*.o
 
@@ -58,7 +58,7 @@ time:
 
 
 ins: tests/ins_test.cpp
-	$(CXX) -c -g -O2 -std=c++11 tests/ins_test.cpp -o tests/ins_test.o
+	$(CXX) -c -g -O0 -std=c++11 tests/ins_test.cpp -o tests/ins_test.o
 	$(CXX) $(CXXFLAGS) $(COV_FLAGS) tests/ins_test.o -o ins_test
 	rm tests/ins_test.o
 
