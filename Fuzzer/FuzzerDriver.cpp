@@ -399,7 +399,7 @@ int FuzzerDriver(int *argc, char ***argv, UserCallback Callback) {
   Options.UseCounters = Flags.use_counters;
   // Options.FFBitmap = Flags.fitness_func_bitmap;
   Options.UseIndirCalls = Flags.use_indir_calls;
-  Options.UseMemcmp = Flags.use_memcmp;
+  Options.UseMemcmp = Flags.use_memcmp; //新增加的功能
   Options.UseMemmem = Flags.use_memmem;
   Options.UseCmp = Flags.use_cmp;
   Options.UseValueProfile = Flags.use_value_profile;
@@ -456,7 +456,7 @@ int FuzzerDriver(int *argc, char ***argv, UserCallback Callback) {
     Printf("INFO: Seed: %u\n", Seed);
 
   Random Rand(Seed);
-  Random TrueRand(Seed);
+  Random TrueRand(Seed); //新增加的代码
   auto *MD = new MutationDispatcher(Rand, TrueRand, Options);
   auto *Corpus = new InputCorpus(Options.OutputCorpus);
   auto *F = new Fuzzer(Callback, *Corpus, *MD, Options);
@@ -516,7 +516,7 @@ int FuzzerDriver(int *argc, char ***argv, UserCallback Callback) {
       else
         F->CrashResistantMerge(Args, *Inputs);
     } else {
-      F->Merge(*Inputs);
+      F->Merge(*Inputs); //新增加的代码
     }
     exit(0);
   }
